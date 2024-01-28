@@ -19,7 +19,6 @@ public class CustomerController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Customer>> GetCustomerById([FromRoute] int id)
     {
-
         Customer? c = await _context.Customers.FindAsync(id);
         
         if (c == null)
