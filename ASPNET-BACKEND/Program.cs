@@ -1,4 +1,4 @@
-using ASPNET_BACKEND.Models;
+using ASPNET_BACKEND.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +11,6 @@ var app = builder.Build();
 
 app.UseRouting();
 app.UseEndpoints(endpoints => endpoints.MapControllers());
-
 
 
 
