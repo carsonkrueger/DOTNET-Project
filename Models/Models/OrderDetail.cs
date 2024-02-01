@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OnlineStore.InputModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineStore.Models;
 
@@ -10,8 +11,6 @@ public class OrderDetail
     public int ProductId { get; set; }
     public int OrderId { get; set; }
 
-    [Required]
-    public Order Order { get; set; }
-    [Required]
-    public Product Product { get; set; }
+    public Order Order { get; set; } = null!;
+    public Product Product { get; set; } = null!;
 }
