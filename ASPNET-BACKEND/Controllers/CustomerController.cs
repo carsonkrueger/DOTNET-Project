@@ -29,24 +29,50 @@ public class CustomerController : ControllerBase
         return Ok(c);
     }
 
-    // PUT: Customer
-    [HttpPut]
-    [Route("customers/{id}")]
-    public async Task<ActionResult> UpdateCustomer([FromBody] Customer updated)
+    // POST: customers
+    [HttpPost]
+    [Route("customers")]
+    public async Task<ActionResult<Customer>> CreateCustomer([FromBody] CustomerInput customer)
     {
-        _context.Update(updated);
+        Customer c = new Customer()
+        {
+            FirstName = customer.FirstName,
+            LastName = customer.LastName,
+            Address = customer.Address,
+            Phone = customer.Phone,
+        };
 
         try
         {
+            await _context.Customers.AddAsync(c);
             await _context.SaveChangesAsync();
         }
         catch (Exception)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError);
+            return StatusCode(500);
         }
-        
-        return Ok();
+
+        return Ok(c);
     }
+
+    // PUT: Customer
+    //[HttpPut]
+    //[Route("customers/{id}")]
+    //public async Task<ActionResult> UpdateCustomer([FromBody] Customer updated)
+    //{
+    //    _context.Update(updated);
+
+    //    try
+    //    {
+    //        await _context.SaveChangesAsync();
+    //    }
+    //    catch (Exception)
+    //    {
+    //        return StatusCode(StatusCodes.Status500InternalServerError);
+    //    }
+        
+    //    return Ok();
+    //}
 
     [HttpDelete]
     [Route("customers/{id}")]
